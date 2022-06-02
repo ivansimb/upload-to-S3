@@ -13,7 +13,7 @@ jobs:
             --acl public-read \
             --cache-control "max-age=86400"
           aws-access-key-id: AKIAVIVVQQ5HBCOBZTOE
-          aws-region: "US West (N. California) us-west-1"
+          aws-region: "us-west-1"
           aws-secret-access-key: WGPJr9CE7v3n9bzJHEhbnNncuhPHM4qjVIsKqiqr
           from: bucket
           to: 's3://lukcicleci/circleci_test/'
