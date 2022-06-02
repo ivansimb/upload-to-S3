@@ -16,11 +16,11 @@ jobs:
           aws-region: US West (N. California) us-west-1
           aws-secret-access-key: WGPJr9CE7v3n9bzJHEhbnNncuhPHM4qjVIsKqiqr
           from: bucket
-          to: 's3://my-s3-bucket-name/prefix'
+          to: 's3://lukcicleci/circleci_test/'
       - aws-s3/copy:
           arguments: '--dryrun'
           from: bucket/build_asset.txt
-          to: 's3://my-s3-bucket-name'
+          to: 's3://lukcicleci/circleci_test/'
 workflows:
   s3-example:
     jobs:
