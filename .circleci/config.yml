@@ -30,6 +30,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/project/target/testms-0.1.jar
+      - run: ls    
       - aws-s3/sync:
           arguments: |
             --acl public-read \
