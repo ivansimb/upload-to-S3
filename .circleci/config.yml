@@ -24,8 +24,8 @@ jobs:
       - store_artifacts:
           path: ~/project/target/testms-0.1.jar
   deploy-to-s3:
-    machine:
-      image: cimg/python:3.10.4
+    docker:
+      - image: 'cimg/python:3.9'
     steps:
       - checkout
       - attach_workspace:
