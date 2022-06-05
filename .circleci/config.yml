@@ -21,15 +21,13 @@ jobs:
           path: ~/project/target/testms-0.1.jar
       - store_artifacts:
           path: ~/project/target/testms-0.1.jar
-version: 2.1
-orbs:
-  aws-s3: circleci/aws-s3@3.0
-jobs:
   deploy-to-s3:
-    docker:
-      - image: 'cimg/python:3.6'
+    machine:
+      image: circleci/classic:latest
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - aws-s3/sync:
           arguments: |
             --acl public-read \
