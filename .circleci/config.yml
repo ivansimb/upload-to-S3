@@ -41,7 +41,7 @@ jobs:
 workflows:
   build-and-deploy:
     jobs:
-      - test-and-build
+      - build
       - deploy-to-s3:
           requires:
             - test-and-build
