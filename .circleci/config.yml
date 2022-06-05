@@ -32,7 +32,7 @@ jobs:
           at: ~/project/target/testms-0.1.jar
       - run: ls    
       - aws-s3/sync:
-          arguments: --delete
+          arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
           from: ~/project/target/testms-0.1.jar
