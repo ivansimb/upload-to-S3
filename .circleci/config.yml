@@ -23,7 +23,7 @@ jobs:
           path: ~/project/target/testms-0.1.jar
   deploy-to-s3:
     machine:
-      image: circleci/classic:latest
+      image: cimg/python:3.6
     steps:
       - checkout
       - attach_workspace:
