@@ -25,7 +25,7 @@ jobs:
           path: ~/project/target/testms-0.1.jar
   deploy-to-s3:
     machine:
-      image: cimg/python:3.6
+      image: cimg/python:3.10.4
     steps:
       - checkout
       - attach_workspace:
