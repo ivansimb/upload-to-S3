@@ -39,12 +39,10 @@ jobs:
           from: ~/project/target/testms-0.1.jar
           to: 's3://lukecicleci/test/'
 workflows:
-  build-and-deploy:
+  version: 2
+  build_and_test:
     jobs:
       - build
       - deploy-to-s3:
           requires:
-            - test-and-build
-          filters:
-            branches:
-              only: master
+            - build
