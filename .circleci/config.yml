@@ -46,9 +46,13 @@ jobs:
           to: 's3://lukecicleci/'
 workflows:
   version: 2
-  build_and_test:
+  build-test-and-approval-deploy:
     jobs:
-      - build
+      - hold:
+          type: approval
+      - build:
+          requires:
+            - hold
       - deploy-to-s3:
           requires:
             - build
