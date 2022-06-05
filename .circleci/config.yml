@@ -1,24 +1,52 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:15.0.1
+    steps:
+      - checkout
+      - run:
+          command: find . -name 'pom.xml' | sort | xargs cat > /tmp/maven_cache_seed
+          working_directory: ~/project
+      - restore_cache:
+          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
+      - run:
+          command: mvn -Puat clean package
+          working_directory: ~/project
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+          key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
+      - store_test_results:
+          path: ~/project/target/testms-0.1.jar
+      - store_artifacts:
+          path: ~/project/target/testms-0.1.jar
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@3.0
 jobs:
-  build:
+  deploy-to-s3:
     docker:
       - image: 'cimg/python:3.6'
     steps:
       - checkout
-      - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - aws-s3/sync:
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
-          from: bucket
+          from: ~/project/target/testms-0.1.jar
           to: 's3://lukecicleci/test/'
       - aws-s3/copy:
           arguments: '--dryrun'
-          from: bucket/build_asset.txt
+          from: ~/project/target/testms-0.1.jar
           to: 's3://lukecicleci/test/'
 workflows:
-  s3-example:
+  build-and-deploy:
     jobs:
-      - build
+      - test-and-build
+      - deploy-to-s3:
+          requires:
+            - test-and-build
+          filters:
+            branches:
+              only: master
