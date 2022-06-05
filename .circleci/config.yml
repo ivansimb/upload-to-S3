@@ -24,7 +24,7 @@ jobs:
       - store_artifacts:
           path: ~/project/target/testms-0.1.jar
       - persist_to_workspace:
-          root: ~/project/target/testms-0.1.jar
+          root: ~/project
           paths: .
   deploy-to-s3:
     docker:
