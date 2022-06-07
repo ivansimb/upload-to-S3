@@ -35,13 +35,13 @@ jobs:
           at: ~/project/target/testms-0.1.jar
       - run: ls
       - aws-s3/sync:
-          arguments: 'CIRCLE_PREVIOUS_BUILD_NUM'
+          arguments: |
             --acl public-read \
             --cache-control "max-age=86400"
           from: ~/project/target/testms-0.1.jar
           to: 's3://lukecicleci/test/'
       - aws-s3/copy:
-          arguments: 'CIRCLE_PREVIOUS_BUILD_NUM'
+          arguments: --dryrun
           from: ~/project/target/testms-0.1.jar
           to: 's3://lukecicleci/'
 workflows:
