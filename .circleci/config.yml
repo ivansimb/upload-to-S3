@@ -23,6 +23,9 @@ jobs:
           path: ~/project/target/testms-0.1.jar
       - store_artifacts:
           path: ~/project/target/testms-0.1.jar
+      - persist_to_workspace:
+          root: ~/project
+          paths: .
   deploy-to-s3:
     docker:
       - image: 'cimg/python:3.9'
