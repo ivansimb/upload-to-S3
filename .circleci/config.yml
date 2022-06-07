@@ -20,11 +20,11 @@ jobs:
             - ~/.m2/repository
           key: circleci-java-maven-{{ checksum "/tmp/maven_cache_seed" }}
       - store_test_results:
-          path: ~/project/target/testms-0.1.jar
+          path: ~/project/target/jar/testms-0.1.jar
       - store_artifacts:
-          path: ~/project/target/testms-0.1.jar
+          path: ~/project/target/jar/testms-0.1.jar
       - persist_to_workspace:
-          root: ~/project
+          root: ~/project/jar/
           paths: .
   deploy-to-s3:
     docker:
